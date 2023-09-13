@@ -5,7 +5,7 @@
       ansible.builtin.debug:
         msg: Hello World
 
-- name: Demo On Printing
+- name: Demo On Vars
   hosts: localhost
   vars:
     URL: example.com
@@ -13,3 +13,23 @@
    - name: Print a variable
      ansible.builtin.debug:
        msg: "{{ URL }}"
+
+- name: Demo on task level Vars
+  hosts: localhost
+  vars:
+    URL: play.example.com
+  tasks:
+    - name: print task variable
+      ansible.builtin.debug:
+        msg: "{{ URL }}"
+      vars:
+        URL: task.example.com
+
+    - name: print play variable
+      ansible.builtin.debug:
+        msg: "{{ URL1 }}"
+
+- name: Demo on roles variables
+  hosts: localhost
+  roles:
+    - demo
